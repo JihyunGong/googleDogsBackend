@@ -8,13 +8,13 @@ class Middleware {
       const decoded = await admin.auth().verifyIdToken(token);
       if (decoded) {
         req.user = decoded;
-        
+
         return next();
       }
 
       return res.json({ message: "Unauthorized" });
     } catch (err) {
-      return res.json({ message: "Internal Error"});
+      return res.json({ message: "Internal Server Error" });
     }
   }
 }

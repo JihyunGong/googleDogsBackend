@@ -1,14 +1,13 @@
 const express = require("express");
-const createError = require("http-errors");
 const User = require("../models/User");
 const router = express.Router();
 
-router.get("/", async function (req, res, next) {
+router.get("/", async (req, res, next) => {
   try {
     const { name, picture, email } = req.user;
-    const user = await User.findOne({ email: email });
+    const existingUser = await User.findOne({ email: email });
 
-    if (!user) {
+    if (!existingUser) {
       await User.create({
         displayName: name,
         photoURL: picture,

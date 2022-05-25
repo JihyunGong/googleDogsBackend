@@ -9,9 +9,9 @@ const cors = require("cors")
 
 const index = require("./routes/index");
 const docs = require("./routes/docs");
-const middleware = require("./routes/middleware");
 
 const Document = require("./models/Document");
+const middleware = require("./routes/middleware");
 
 const app = express();
 
@@ -36,14 +36,14 @@ const io = require("socket.io")(3003, {
   },
 });
 
-const defaultValue = "";
-
 io.on("connection", (socket) => {
   console.log("Socket Connected!");
 
   socket.on("get-document", async (documentId) => {
     const document = await findOrCreateDocument(documentId);
+
     socket.join(documentId);
+
     if (document) {
       socket.emit("load-document", document.data);
     }
@@ -57,6 +57,8 @@ io.on("connection", (socket) => {
     });
   });
 });
+
+const defaultValue = "";
 
 async function findOrCreateDocument(id) {
   if (!id) {
