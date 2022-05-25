@@ -8,23 +8,21 @@ router.get("/", async function (req, res, next) {
     const { name, picture, email } = req.user;
     const user = await User.findOne({ email: email });
 
-    if (user) {
-      next(createError(400, "이미 등록된 유저입니다."));
+    if (!user) {
+      await User.create({
+        displayName: name,
+        photoURL: picture,
+        email,
+      });
     }
 
-    await User.create({
-      displayName: name,
-      photoURL: picture,
-      email,
-    });
-
     return res.json({
-      docsSample: [
+      myDocsSample: [
         {
-          title: "doc1"
+          data: "doc1"
         },
         {
-          title: "doc2"
+          data: "doc2"
         }
       ]
     });
