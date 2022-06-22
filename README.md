@@ -25,9 +25,3 @@
   - axios.get() 사용
 
 위와 같은 방법들을 시도한 후, 요청이 올바르게 가기 시작하였으나 종종 똑같은 요청에 동일한 에러가 일어나는 것을 확인하여 아직 완전히 해결하지 못했습니다. 이 부분은 더 탐구헤보겠습니다. 
-
-
-### 환경 변수 리스트
-```json
-MONGO_URL="mongodb+srv://jihyungong:Rhdwlgus2672@google-dogs-cluster.u8dgr.mongodb.net/test"
-```
